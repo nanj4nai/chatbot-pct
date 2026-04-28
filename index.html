@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Thesis Archive System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Chat scrollbar */
+    #chat-box::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #chat-box::-webkit-scrollbar-thumb {
+      background: #16a34a;
+      border-radius: 10px;
+    }
+
+    #chat-box::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 via-green-50 to-green-100 min-h-screen">
+  <div id="page-transition" class="fixed inset-0 bg-white opacity-0 pointer-events-none transition-opacity duration-500 z-[9999]"></div>
+  <!-- Navbar -->
+  <nav class="w-full px-6 py-4 backdrop-blur bg-white/70 border-b border-gray-200 sticky top-0 z-50">
+
+    <div class="flex items-center justify-between">
+
+      <!-- Logo -->
+      <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2">
+        <i data-lucide="database"></i>
+        <span class="hidden sm:inline">PCT Thesis Archive System</span>
+        <span class="sm:hidden">PCT Archive</span>
+      </h1>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-2 text-sm text-gray-600">
+        <span>Guest Mode ·</span>
+        <a href="login.php" class="font-medium text-green-600 hover:underline">Login</a>
+        <span>/</span>
+        <a href="register.php" class="font-medium text-green-600 hover:underline">Register</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="menu-toggle" class="md:hidden text-gray-700">
+        <i data-lucide="menu"></i>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden mt-4 flex flex-col gap-3 text-sm text-gray-700 md:hidden">
+
+      <span class="text-gray-500">Guest Mode</span>
+
+      <a href="login.php" class="block px-4 py-2 rounded-lg bg-green-600 text-white text-center">
+        Login
+      </a>
+
+      <a href="register.php" class="block px-4 py-2 rounded-lg border border-gray-300 text-center hover:bg-gray-50">
+        Register
+      </a>
+
+    </div>
+
+  </nav>
+  <!-- Hero Section -->
+  <section class="relative flex items-center justify-center text-center px-6 py-28">
+
+    <!-- Background Glow -->
+    <div class="absolute inset-0 -z-10 flex justify-center">
+      <div class="w-[500px] h-[500px] bg-green-300 opacity-30 blur-3xl rounded-full"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur px-4 py-1 rounded-full border text-sm text-gray-600 mb-6 shadow-sm">
+        <i data-lucide="sparkles" class="w-4 h-4 text-green-600"></i>
+        Academic Research Platform
+      </div>
+
+      <!-- Heading -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+        Manage & Explore
+        <span class="text-green-600">Thesis Archives</span>
+        Effortlessly
+      </h1>
+
+      <!-- Subtext -->
+      <p class="mt-6 text-lg text-gray-600 max-w-xl mx-auto">
+        A centralized platform for storing, discovering, and accessing capstone and thesis projects at the Philippine College of Technology.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+        <a href="login.php" onclick="navigate(event, 'login.php')" class="px-8 py-3 bg-green-600 text-white rounded-xl shadow hover:bg-green-500 transition flex items-center justify-center gap-2">
+          <i data-lucide="log-in"></i> Get Started
+        </a>
+
+        <a href="register.php" class="px-8 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition flex items-center justify-center gap-2">
+          <i data-lucide="user-plus"></i> Create Account
+        </a>
+      </div>
+
+      <!-- Guest -->
+      <a href="guest/view_projects_public.php" class="mt-4 inline-block text-sm text-gray-500 hover:text-gray-700">
+        Continue as Guest →
+      </a>
+
+      <!-- Stats -->
+      <div class="mt-14 grid grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="text-2xl font-bold text-gray-900">1,200+</p>
+          <p class="text-sm text-gray-500">Projects</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-gray-900">300+</p>
+          <p class="text-sm text-gray-500">Students</p>
+        </div>
+        <div>
+          <p class="text-2xl font-bold text-gray-900">24/7</p>
+          <p class="text-sm text-gray-500">Access</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 pb-20 grid md:grid-cols-3 gap-6">
+
+    <div class="bg-white/70 backdrop-blur border rounded-xl p-6 text-center shadow-sm">
+      <i data-lucide="search" class="mx-auto text-green-600 mb-3"></i>
+      <h4 class="font-semibold text-gray-800">Smart Search</h4>
+      <p class="text-sm text-gray-500 mt-1">Find projects instantly with filters</p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur border rounded-xl p-6 text-center shadow-sm">
+      <i data-lucide="database" class="mx-auto text-green-600 mb-3"></i>
+      <h4 class="font-semibold text-gray-800">Centralized Storage</h4>
+      <p class="text-sm text-gray-500 mt-1">All research in one secure place</p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur border rounded-xl p-6 text-center shadow-sm">
+      <i data-lucide="shield" class="mx-auto text-green-600 mb-3"></i>
+      <h4 class="font-semibold text-gray-800">Secure Access</h4>
+      <p class="text-sm text-gray-500 mt-1">Role-based system protection</p>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-500 pb-6">
+    © <?= date('Y') ?> Philippine College of Technology
+  </footer>
+
+
+  <!-- Floating Chat -->
+  <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+
+    <!-- Toggle Button -->
+    <button id="chat-toggle" class="bg-green-600 hover:bg-green-500 text-white p-4 rounded-full shadow-xl transition">
+      <i data-lucide="message-circle"></i>
+    </button>
+
+    <!-- Chat Container -->
+    <div id="chat-box-wrapper"
+      class="hidden fixed bottom-20 right-4 w-[calc(100%-2rem)] h-[70vh] 
+      sm:bottom-6 sm:right-6 sm:w-96 sm:h-[500px]
+      bg-white/90 backdrop-blur-xl border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      <!-- Header -->
+      <div class="bg-green-600 text-white px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm">🤖</div>
+          <div>
+            <p class="text-sm font-semibold">Thesis Assistant</p>
+            <p class="text-xs text-green-100">Online</p>
+          </div>
+        </div>
+        <button onclick="closeChat()">✕</button>
+      </div>
+
+      <!-- Messages -->
+      <div id="chat-box" class="flex-1 p-4 space-y-4 overflow-y-auto text-sm bg-gray-50 scroll-smooth break-words">
+        <!-- Bot Welcome -->
+        <div class="flex items-start gap-3 max-w-full">
+
+          <!-- Avatar -->
+          <div class="w-8 h-8 shrink-0 bg-green-600 text-white rounded-full flex items-center justify-center text-sm">
+            🤖
+          </div>
+
+          <!-- Message -->
+          <div class="bg-white px-4 py-2.5 rounded-2xl shadow-sm text-gray-700 
+                max-w-[80%] break-words whitespace-pre-wrap leading-relaxed">
+            Hi! I can help you navigate the archive 👋
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Quick Suggestions -->
+      <div class="px-3 py-2 flex flex-wrap gap-2 border-t bg-white">
+        <button onclick="sendQuick('How do I register?')" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full">Register</button>
+        <button onclick="sendQuick('What is this system?')" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full">About</button>
+        <button onclick="sendQuick('Can I access as guest?')" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full">Guest Access</button>
+      </div>
+
+      <!-- Input -->
+      <form id="chat-form" class="flex items-center gap-2 p-3 border-t bg-white">
+        <input id="chat-input" type="text" placeholder="Type a message..."
+          class="flex-1 px-4 py-2 text-sm rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500">
+
+        <button type="submit" class="bg-green-600 hover:bg-green-500 text-white p-2 rounded-full">
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+
+    </div>
+  </div>
+  <script>
+    lucide.createIcons();
+
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+
+
+    function navigate(e, url) {
+      e.preventDefault();
+
+      const overlay = document.getElementById("page-transition");
+
+      overlay.classList.remove("opacity-0");
+      overlay.classList.add("opacity-100");
+
+      setTimeout(() => {
+        window.location.href = url;
+      }, 400); // match animation duration
+    }
+  </script>
+</body>
+
+</html>
